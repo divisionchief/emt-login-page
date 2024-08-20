@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT Student Login</title>
+    
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+    <!-- Firebase Authentication SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAYEYaksJHyYq6DvwxxIvEnJ2RWJ3Pgcsg",
+  	authDomain: "emt-student-progress.firebaseapp.com",
+ 	 projectId: "emt-student-progress",
+  	storageBucket: "emt-student-progress.appspot.com",
+  	messagingSenderId: "225985367965",
+  	appId: "1:225985367965:web:15664aff625a147abd6974",
+ 	 measurementId: "G-R570GQ3PMD"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+
+    <div id="login-container">
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Enter your email">
+        <input type="password" id="password" placeholder="Enter your password">
+        <button id="login-button">Login</button>
+        <p id="error-message"></p>
+    </div>
+
+    <script>
+        // Initialize Firebase Authentication
+        const auth = firebase.auth();
+
+        // Handle the login button click event
+        document.getElementById('login-button').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    var user = userCredential.user;
+                    window.location.href = "dashboard.html"; // Redirect to the dashboard or progress page
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    document.getElementById('error-message').textContent = errorMessage;
+                });
+        });
+    </script>
+
+</body>
+</html>
